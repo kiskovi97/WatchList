@@ -5,6 +5,7 @@ import Error from './pages/Error';
 import Navbar from './Navbar';
 import DBDishes from './pages/DBDishes.jsx';
 import DBDish from './pages/DBDish.jsx';
+import Show from './pages/Show.jsx';
 import Upload from './pages/Upload.jsx';
 import ReactGa from 'react-ga';
 import { useEffect } from 'react';
@@ -47,6 +48,7 @@ function App() {
           <Route exact path="/dbdishes" element={<DBDishes/>} />
           <Route exact path="/dbdish/*" element={<DBDish/>} />
           <Route exact path="/upload" element={<Upload/>} />
+          <Route exact path="/show/*" element={<Show/>} />
           <Route component={Error} />
         </Routes>
     </main>
