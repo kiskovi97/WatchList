@@ -1,0 +1,40 @@
+@value colors: "./pages/colors.css";
+@value backgroundColor, darkestColor, mainColor, lightdarkColor from colors;
+
+.Header {
+    padding-top: 1em;
+    color: white;
+    background-color: mainColor;
+    background: linear-gradient(-90deg, mainColor 0%, darkestColor 100%);
+    margin: 0;
+}
+
+.Header.Home {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.Header ul {
+    padding-left: 0;
+    padding-right: 0;
+    display:table;
+    width: max-content;
+    height: max-content;
+    margin: auto;
+}
+
+.Header ul a {
+    color: white;
+    text-decoration: none;
+    padding: 1em;
+    display:table-cell;
+}
+
+.Header ul li {
+    display:table-cell;
+}
+
+.Header ul a:hover {
+    color: white;
+    background-color: darkestColor;
+}

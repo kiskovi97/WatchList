@@ -1,0 +1,87 @@
+@value colors: "./colors.css";
+@value backgroundColor, darkestColor, mainColor, lightdarkColor, lightColor  from colors;
+
+.iframe {
+    height: 500px;
+    width: 400px;
+    margin: 0 auto;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.page {
+    height: max-content;
+    min-height: 90vh;
+    margin: 0;
+    text-align: left;
+    background-color: backgroundColor;
+    color: darkestColor;
+    background: linear-gradient(90deg, backgroundColor 0%, lightdarkColor 100%);
+}
+
+img.minilogo, .minilogo img{
+    width: 20pt;
+    height: 20pt;
+    margin: 10pt;
+    object-fit: scale-down;
+    animation: unset;
+    filter: drop-shadow(0px 5px 5px rgba(34, 34, 34, 0.315));
+}
+
+.minilogo svg {
+    width: 5em;
+    height: 5em;
+    margin: 10pt;
+    object-fit: scale-down;
+    animation: unset;
+    filter: drop-shadow(0px 5px 5px rgba(34, 34, 34, 0.315));
+}
+
+.logo, .logo img, .logo svg {
+    height: 20em;
+    width: 20em;
+    object-fit: scale-down;
+}
+
+.filters {
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+}
+
+.filters input 
+{
+    width: 100%;
+}
+
+.filters button {
+    margin-right: 1em;
+    border: 0;
+    border-radius: 1em;
+    padding: 1em;
+    cursor: pointer;
+    font-weight: 500;
+    filter: drop-shadow(0px 5px 5px rgba(34, 34, 34, 0.315));
+}
+
+.filters button:hover {
+    background-color: lightColor;
+}
+
+.filters button.selected {
+    background-color: lightdarkColor;
+    color: white;
+}
+
+
+@media only screen and (max-width: 800px) {
+
+    .logo, .logo img, .logo svg {
+        height: 10em;
+        width: 10em;
+        object-fit: scale-down;
+    }
+
+    h1, h2, h3 {
+    }
+}

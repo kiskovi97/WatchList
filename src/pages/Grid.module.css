@@ -1,0 +1,33 @@
+.grid {
+    display: grid; 
+    grid-template-columns: 1fr 1fr;
+    padding: 2em;
+}
+
+.grid_big {
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100em;
+    margin: 0 auto;
+    align-content: center;
+    gap: 3em;
+    padding: 2em;
+}
+
+.grid > div {
+    margin: auto;
+    position: relative;
+    max-width: 40em;
+}
+
+@media only screen and (max-width: 600px) {
+    .grid {
+        display: grid; 
+        grid-template-columns: 1fr;
+    }
+
+    .grid_big {
+        gap: 2em;
+    }
+}

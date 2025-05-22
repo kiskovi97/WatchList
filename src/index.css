@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'MyFont';
+  src: local('MyFont'), url("./fonts/OpenSauceOne-Regular.woff") format('woff');
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+
+body {
+  margin: 0;
+  font-family: 'MyFont';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(-90deg, mainColor 0%, darkestColor 100%);
+  line-height: 2em;
+  font-size: 18px;
+}
+
+@media only screen and (max-width: 800px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
