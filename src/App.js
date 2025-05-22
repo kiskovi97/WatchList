@@ -3,10 +3,8 @@ import { Route, Routes, useLocation } from 'react-router';
 import Home from './pages/Home';
 import Error from './pages/Error';
 import Navbar from './Navbar';
-import DBDishes from './pages/DBDishes.jsx';
-import DBDish from './pages/DBDish.jsx';
+import AllShows from './pages/AllShows.jsx';
 import Show from './pages/Show.jsx';
-import Upload from './pages/Upload.jsx';
 import ReactGa from 'react-ga';
 import { useEffect } from 'react';
 import { useAuth } from "./AuthContext";
@@ -45,9 +43,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route exact path="/" element={<Home/>}  />
-          <Route exact path="/dbdishes" element={<DBDishes/>} />
-          <Route exact path="/dbdish/*" element={<DBDish/>} />
-          <Route exact path="/upload" element={<Upload/>} />
+          <Route exact path="/all" element={<AllShows/>} />
           <Route exact path="/show/*" element={<Show/>} />
           <Route component={Error} />
         </Routes>
