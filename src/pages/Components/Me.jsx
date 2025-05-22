@@ -13,11 +13,8 @@ var Me = () =>
         <div className={styles.titleBlock}>
             <div className={styles.frontTitle}>
                 <ScrollAnimation animateIn="fadeInRight" animateOut="fadeOutRight" animateOnce offset={20}>
-                    <div className={styles.title} hidden={!navigator.language.startsWith("en")}>
-                        Husband Material
-                    </div>
-                    <div className={styles.title} hidden={!navigator.language.startsWith("hu")}>
-                        Legényfogó
+                    <div className={styles.title}>
+                        Watchlist
                     </div>
                 </ScrollAnimation>
                 <ScrollAnimation className={styles.logos} animateIn="fadeInLeft" animateOut="fadeOutLeft" offset={180} animateOnce>
@@ -25,9 +22,6 @@ var Me = () =>
                     <a href="https://github.com/kiskovi97" className={pStyles.minilogo}><img src={github} alt="" /></a>
                 </ScrollAnimation>
             </div>
-            <ScrollAnimation animateIn="fadeInUp" animateOut="fadeOutDown" className={styles.person} animateOnce>
-                <img src={image} alt="" />
-            </ScrollAnimation>
         </div>
         <div className={styles.description}>
             <ScrollAnimation animateIn="fadeInRight" animateOut="fadeOutRight" animateOnce>

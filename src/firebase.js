@@ -4,12 +4,12 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: "cook-book-admin.firebaseapp.com",
-  projectId: "cook-book-admin",
-  storageBucket: "cook-book-admin.firebasestorage.app",
+  authDomain: "watchlist-9adc9.firebaseapp.com",
+  projectId: "watchlist-9adc9",
+  storageBucket: "watchlist-9adc9.firebasestorage.app",
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: "G-S9P5S4GTBD"
+  measurementId: "G-0KBGTB66VD"
 };
 
 console.log("Firebase REACT_APP_FIREBASE_APP_ID:", process.env.REACT_APP_FIREBASE_APP_ID);
