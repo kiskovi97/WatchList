@@ -1,6 +1,6 @@
-import styles from './Receipt.module.css'
-import ScrollAnimation from 'react-animate-on-scroll'
+import styles from './Show.module.css'
 import movieDB from '../../movieDB.js';
+import Season from './Season.jsx';
 
 function ShowBig({ data }) {
 
@@ -18,16 +18,8 @@ function ShowBig({ data }) {
                     </div>
                 </div>
                 <div className={styles.description}>
-                    <ScrollAnimation animateIn="fadeInLeft" animateOut="fadeOutLeft" animateOnce >
-                        {data.seasons?.map(station => (
-                            <div>
-                                <h3>{station.name}</h3>
-                                <h5>{station.air_date}</h5>
-                                <div>
-                                    {station.overview}
-                                </div>
-                            </div>))}
-                    </ScrollAnimation>
+                {data.seasons?.filter(season => season.season_number !== 0).map(season => (
+                    <Season season={season} seriesId={data.id}/>))}
                 </div>
             </div>)
 
