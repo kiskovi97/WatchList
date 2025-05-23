@@ -11,19 +11,20 @@ var AllShows = () =>
     const [movies, setMovies] = useState([]);
     
     useEffect(() => {
-        movieDB.tv.getTopRated({}, (success) => { 
+
+        movieDB.search.getTv({ query: filter }, (success) => { 
             var data = JSON.parse(success);
             setMovies(data.results); 
         }, () => {})
-    }, []);
+    }, [filter]);
     
     return(<div className={styles.page}>
         <div className={styles.filters}>
             <input 
             type="text"
             placeholder="Search..."
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)} />
+            onBlur={(e) => setFilter(e.target.value)} 
+            />
         </div>
         <div className={gStyles.grid_big}>
             {movies.map((station, index) => (<ShowSmall data={station}/>))}
