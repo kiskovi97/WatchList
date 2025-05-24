@@ -3,7 +3,7 @@ import ScrollAnimation from 'react-animate-on-scroll'
 import { useNavigate  } from 'react-router';
 import movieDB from '../../movieDB.js';
 
-const ShowSmall = ({data, hidden}) => {
+const ShowSmall = ({data, watchData, hidden}) => {
     const navigate = useNavigate();
     const handleClick = (index) => navigate("/" + index);
 

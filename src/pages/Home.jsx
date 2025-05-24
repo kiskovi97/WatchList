@@ -4,22 +4,42 @@ import Me from './Components/Me'
 import { useState, useEffect } from 'react';
 import ShowSmall from './Components/ShowSmall.jsx'
 import movieDB from '../movieDB.js';
+import { fetchData } from '../dynamoService';
 
 const Home = () => {
-    const [movies, setMovies] = useState([]);
+    const [dbData, setDBData] = useState([]);
+    const [shows, setShows] = useState([]);
 
-     useEffect(() => {
-        movieDB.tv.getTopRated({}, (success) => { 
-            var data = JSON.parse(success);
-            setMovies(data.results); 
-        }, () => {})
+    const fetchAndSetData = async () => {
+        const result = await fetchData();
+        if (result.success) {
+            console.log(result.data);
+            setDBData(result.data);
+        } else {
+            alert("Error Fetching Data: " + result.message);
+        }
+    }
+
+    useEffect(() => {
+        let shows = [];
+        for(let watchData of dbData) {
+            movieDB.tv.getById({id: watchData.showId}, (success) => {
+                var data = JSON.parse(success);
+                shows.push({show: data, watchData: watchData});
+                setShows([...shows]);
+            }, () => {});
+        }
+    }, [dbData]);
+
+    useEffect(() => {
+            fetchAndSetData();
     }, []);
     
     return (
         <div className={styles.page}>
             <Me />
             <div className={gStyles.grid_big} key="top-shows">
-                {movies.map((station, index) => (<ShowSmall data={station}/>))}
+                {shows.map((station, index) => (<ShowSmall data={station.show} watchData={station.watchData}/>))}
             </div>
         </div>)
 };
