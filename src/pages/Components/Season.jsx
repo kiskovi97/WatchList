@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import ScrollAnimation from 'react-animate-on-scroll'
 import styles from './Show.module.css'
+import { motion } from "framer-motion";
 
 function Season({ season, episodesWatched, onEpisodesAdded, onEpisodesRemoved, editable }) {
 
@@ -27,7 +27,12 @@ function Season({ season, episodesWatched, onEpisodesAdded, onEpisodesRemoved, e
         var image = season.image?.medium;
 
         return (
-            <ScrollAnimation animateIn="fadeInLeft" animateOut="fadeOutLeft" animateOnce >
+            <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5 }}
+                >
                 <div className={styles.season}>
                     <div className={styles.image_season}>
                         <img src={image} hidden={!image} alt="" className={styles.background} />
@@ -52,7 +57,7 @@ function Season({ season, episodesWatched, onEpisodesAdded, onEpisodesRemoved, e
                         </div>
                     </div>
                 </div>
-            </ScrollAnimation>
+            </motion.div>
             )
 
 }

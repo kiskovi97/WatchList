@@ -1,8 +1,8 @@
 import styles from './ShowSmall.module.css'
-import ScrollAnimation from 'react-animate-on-scroll'
 import { useNavigate  } from 'react-router';
+import { motion } from "framer-motion";
 
-const ShowSmall = ({show, watchData, hidden}) => {
+const ShowSmall = ({show, watchData }) => {
     const navigate = useNavigate();
     const handleClick = (index) => navigate("/" + index);
 
@@ -12,8 +12,13 @@ const ShowSmall = ({show, watchData, hidden}) => {
     if (!watchData)
     {
         return (
-        <div hidden={hidden}>
-            <ScrollAnimation animateIn={"fadeIn"} animateOnce duration={0.6} offset={0}>
+        <div >
+            <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5 }}
+            >
                 <div className={styles.receipt} onClick={() => handleClick("show/" + id)} >
                     <div className={styles.image} >
                         <img src={image} hidden={!image} alt="" className={styles.background} />
@@ -23,7 +28,7 @@ const ShowSmall = ({show, watchData, hidden}) => {
                         <div className={styles.details}>{show.summary}</div>
                     </div>
                 </div>
-            </ScrollAnimation>
+            </motion.div>
         </div>
         )
     }
@@ -33,8 +38,13 @@ const ShowSmall = ({show, watchData, hidden}) => {
     const nextEpisode = show.next_episode_to_watch;
 
     return (
-        <div hidden={hidden}>
-            <ScrollAnimation animateIn={"fadeIn"} animateOnce duration={0.6} offset={0}>
+        <div >
+            <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5 }}
+            >
                 <div className={styles.receipt} onClick={() => handleClick("show/" + id)} >
                     <div className={styles.image} >
                         <img src={image} hidden={!image} alt="" className={styles.background} />
@@ -54,7 +64,7 @@ const ShowSmall = ({show, watchData, hidden}) => {
                         </div>
                     </div>
                 </div>
-            </ScrollAnimation>
+            </motion.div>
         </div>
         )
 };
