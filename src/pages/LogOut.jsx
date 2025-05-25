@@ -1,11 +1,8 @@
 // Login.js
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
-import { useAuth } from "../AuthContext";
 
 function LogOut() {
-
-  const { user } = useAuth();
 
   const handleGoogleSignIn = async () => {
     try {
@@ -19,7 +16,6 @@ function LogOut() {
 
   return (
     <div>
-      {user.email}
       <button onClick={handleGoogleSignIn}>LogOut</button>
     </div>
   );

@@ -4,6 +4,31 @@
   /* other formats include: 'woff2', 'truetype, 'opentype',
                             'embedded-opentype', and 'svg' */
 }
+input {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 5px 10px rgba(46, 46, 46, 0.411);
+}
+input:hover {
+  border: 2px solid rgba(0, 0, 0, 1);
+  box-shadow: 0 5px 10px rgba(46, 46, 46, 1);
+}
+
+button {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.473);
+  box-shadow: 0 5px 10px rgba(46, 46, 46, 0.411);
+}
+button:hover {
+  border: 2px solid rgba(0, 0, 0, 1);
+  box-shadow: 0 5px 10px rgba(46, 46, 46, 1);
+}
 
 body {
   margin: 0;
