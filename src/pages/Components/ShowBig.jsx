@@ -1,11 +1,10 @@
 import styles from './Show.module.css'
-import movieDB from '../../movieDB.js';
 import Season from './Season.jsx';
 import { uploadData } from '../../dynamoService';
 
 function ShowBig({ show , watchData}) {
 
-    var image = movieDB.common.getImage({size: "original", file: show.poster_path});
+    var image = show.image?.original || show.image?.medium;
 
     const onAddToMyShows = () => {
         let uploadableData = {
@@ -14,7 +13,7 @@ function ShowBig({ show , watchData}) {
         uploadData(uploadableData);
     };
 
-    const seasonEpisodeNumber = show?.seasons.reduce((partialSum, a) => partialSum + (a.season_number !== 0 ? a.episode_count : 0), 0);
+    const seasonEpisodeNumber = 10;
     const watchedEpisodeCount = watchData && watchData.episodes ? watchData.episodes.length : 0;
 
     return (

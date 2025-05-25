@@ -3,7 +3,7 @@ import gStyles from './Grid.module.css'
 import Me from './Components/Me'
 import { useState, useEffect } from 'react';
 import ShowSmall from './Components/ShowSmall.jsx'
-import movieDB from '../movieDB.js';
+import { getShowById } from '../tvmaze.js';
 import { fetchData } from '../dynamoService';
 
 const Home = () => {
@@ -13,22 +13,24 @@ const Home = () => {
     const fetchAndSetData = async () => {
         const result = await fetchData();
         if (result.success) {
-            console.log(result.data);
             setDBData(result.data);
         } else {
             alert("Error Fetching Data: " + result.message);
         }
     }
 
-    useEffect(() => {
+    const fetchDataById = async (dbData) => {
         let shows = [];
         for(let watchData of dbData) {
-            movieDB.tv.getById({id: watchData.showId}, (success) => {
-                var data = JSON.parse(success);
+            const data = await getShowById(watchData.showId, watchData.episodes);
+            if (data)
                 shows.push({show: data, watchData: watchData});
-                setShows([...shows]);
-            }, () => {});
         }
+        setShows([...shows]);
+    }
+
+    useEffect(() => {
+        fetchDataById(dbData);
     }, [dbData]);
 
     useEffect(() => {
@@ -39,7 +41,15 @@ const Home = () => {
         <div className={styles.page}>
             <Me />
             <div className={gStyles.grid_big} key="top-shows">
-                {shows.map((station, index) => (<ShowSmall data={station.show} watchData={station.watchData}/>))}
+                {shows.filter(item => Date.parse(item.show.next_episode_to_watch?.air_date) < Date.now()).map((station, index) => (<ShowSmall show={station.show} watchData={station.watchData}/>))}
+            </div>
+            <div className={styles.filters}>To Be Aired</div>
+            <div className={gStyles.grid_big} key="top-shows">
+                {shows.filter(item => Date.parse(item.show.next_episode_to_watch?.air_date) > Date.now()).map((station, index) => (<ShowSmall show={station.show} watchData={station.watchData}/>))}
+            </div>
+            <div className={styles.filters}>Finished</div>
+            <div className={gStyles.grid_big} key="top-shows">
+                {shows.filter(item => !item.show.next_episode_to_watch).map((station, index) => (<ShowSmall show={station.show} watchData={station.watchData}/>))}
             </div>
         </div>)
 };

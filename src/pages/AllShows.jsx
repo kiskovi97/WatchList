@@ -3,19 +3,20 @@ import styles from './Page.module.css'
 import gStyles from './Grid.module.css'
 import { useState } from 'react';
 import ShowSmall from './Components/ShowSmall.jsx'
-import movieDB from '../movieDB.js';
+import { searchShowByName } from "../tvmaze.js"
 
 var AllShows = () =>
 {
     const [filter, setFilter] = useState("");
-    const [movies, setMovies] = useState([]);
+    const [shows, setShow] = useState([]);
+
+    const fetchShows = async (filter) => {
+        const shows = await searchShowByName(filter);
+        setShow(shows); 
+    }
     
     useEffect(() => {
-
-        movieDB.search.getTv({ query: filter }, (success) => { 
-            var data = JSON.parse(success);
-            setMovies(data.results); 
-        }, () => {})
+        fetchShows(filter);
     }, [filter]);
     
     return(<div className={styles.page}>
@@ -27,7 +28,7 @@ var AllShows = () =>
             />
         </div>
         <div className={gStyles.grid_big}>
-            {movies.map((station, index) => (<ShowSmall data={station}/>))}
+            {shows.map((station, index) => (<ShowSmall show={station}/>))}
         </div>
     </div>)
 }

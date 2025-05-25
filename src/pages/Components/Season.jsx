@@ -1,10 +1,10 @@
-import movieDB from '../../movieDB.js';
+import { getShowById } from '../../tvmaze.js';
 import { useEffect, useState } from 'react';
 import ScrollAnimation from 'react-animate-on-scroll'
 import styles from './Show.module.css'
 import { uploadData } from '../../dynamoService';
 
-function Season({ seriesId, season, watchData }) {
+function Season({ season, watchData }) {
 
     var [episodes, setEpisodes] = useState([]);
     var [episodesWatched, setEpisodesWatched] = useState([]);
@@ -14,7 +14,7 @@ function Season({ seriesId, season, watchData }) {
     const setWatchSeason = () => {
         for (let episode of episodes)
         {
-            if (!episodesWatched.includes(episode.id))
+            if (!episodesWatched.includes(episode.id) && Date.parse(episode.air_date) <= Date.now())
                 episodesWatched.push(episode.id);
         }
         episodesWatched = episodesWatched.filter(onlyUnique);
@@ -35,17 +35,10 @@ function Season({ seriesId, season, watchData }) {
     }
 
     useEffect(() => {
-        movieDB.tvSeasons.getById({ id: seriesId, season_number: season.season_number }, (success) => {
-            var data = JSON.parse(success);
-            setEpisodes(data.episodes);
-        }, () => {});
-    }, [season, seriesId]);
-
-    useEffect(() => {
         setEpisodesWatched(watchData?.episodes || []);
     }, [watchData]);
 
-        var image = movieDB.common.getImage({size: "original", file: season.poster_path});
+        var image = null;
 
         return (
             <ScrollAnimation animateIn="fadeInLeft" animateOut="fadeOutLeft" animateOnce >
@@ -63,7 +56,9 @@ function Season({ seriesId, season, watchData }) {
                                 <div key={episode.id}>
                                     <input type="checkbox" 
                                         onChange={() => setWatchData(episode)} 
-                                        checked={episodesWatched.includes(episode.id)} />
+                                        checked={episodesWatched.includes(episode.id)}
+                                        hidden={!watchData || Date.parse(episode.air_date) > Date.now()}
+                                        />
                                     {episode.episode_number} - {episode.name}
                                 </div>
                             ))}
