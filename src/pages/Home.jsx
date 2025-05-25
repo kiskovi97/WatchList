@@ -40,16 +40,22 @@ const Home = () => {
     return (
         <div className={styles.page}>
             <Me />
-            <div className={gStyles.grid_big} key="top-shows">
-                {shows.filter(item => Date.parse(item.show.next_episode_to_watch?.air_date) < Date.now()).map((station, index) => (<ShowSmall show={station.show} watchData={station.watchData}/>))}
+            <div className={gStyles.grid_big} key="episodes-to-watch">
+                {shows
+                .filter(item => Date.parse(item.show.next_episode_to_watch?.airdate + " " + item.show.next_episode_to_watch?.airtime) < Date.now())
+                .map((station, index) => (<ShowSmall show={station.show} watchData={station.watchData} key={station.show.id}/>))}
             </div>
             <div className={styles.filters}>To Be Aired</div>
-            <div className={gStyles.grid_big} key="top-shows">
-                {shows.filter(item => Date.parse(item.show.next_episode_to_watch?.air_date) > Date.now()).map((station, index) => (<ShowSmall show={station.show} watchData={station.watchData}/>))}
+            <div className={gStyles.grid_big} key="next-to-air">
+                {shows
+                .filter(item => Date.parse(item.show.next_episode_to_watch?.airdate + " " + item.show.next_episode_to_watch?.airtime) > Date.now())
+                .map((station, index) => (<ShowSmall show={station.show} watchData={station.watchData} key={station.show.id}/>))}
             </div>
             <div className={styles.filters}>Finished</div>
-            <div className={gStyles.grid_big} key="top-shows">
-                {shows.filter(item => !item.show.next_episode_to_watch).map((station, index) => (<ShowSmall show={station.show} watchData={station.watchData}/>))}
+            <div className={gStyles.grid_big} key="finished">
+                {shows
+                .filter(item => !item.show.next_episode_to_watch)
+                .map((station, index) => (<ShowSmall show={station.show} watchData={station.watchData} key={station.show.id}/>))}
             </div>
         </div>)
 };

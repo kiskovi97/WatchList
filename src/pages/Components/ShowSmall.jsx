@@ -28,9 +28,9 @@ const ShowSmall = ({show, watchData, hidden}) => {
         )
     }
 
-    const seasonEpisodeNumber = 0;
+    const seasonEpisodeNumber = show.episodes ? show.episodes.length : 0;
     const watchedEpisodeCount = watchData && watchData.episodes ? watchData.episodes.length : 0;
-
+    const nextEpisode = show.next_episode_to_watch;
 
     return (
         <div hidden={hidden}>
@@ -43,13 +43,13 @@ const ShowSmall = ({show, watchData, hidden}) => {
                         <div className={styles.title}>
                             <div>{show.name}</div>
                             <div>
-                                {show.next_episode_to_watch ? show.next_episode_to_watch.air_date : ""}
+                                {nextEpisode ? nextEpisode.airdate + " " + nextEpisode.airtime : ""}
                             </div>
-                            <div hidden={!show.next_episode_to_watch}>
+                            <div hidden={!nextEpisode}>
                                 {seasonEpisodeNumber - watchedEpisodeCount} episodes left
                             </div>
                         </div>
-                        <div className={styles.details} hidden={show.next_episode_to_watch}>
+                        <div className={styles.details} hidden={nextEpisode}>
                             {show.overview || show.description || "No description available."}
                         </div>
                     </div>

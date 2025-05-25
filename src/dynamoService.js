@@ -35,6 +35,27 @@ export const fetchDataById = async (id) =>
         return {success: false, message: error.message};
     }
 }
+export const removeDataById = async (id) =>
+{
+    await initAWS();
+    
+    const params = {
+        TableName: "WatchListShows",
+        Key: {
+            showId: id.toString(),
+        },
+    }
+
+    try {
+        await dynamodb.delete(params).promise();
+        console.log('Success removing data:', params);
+        return { success: true };
+    } catch(error)
+    {
+        console.error('Error removing data:', error);
+        return {success: false, message: error.message};
+    }
+}
 
 export const uploadData = async (data) => {
   await initAWS();

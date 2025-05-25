@@ -13,21 +13,20 @@ export async function searchShowByName(name) {
   return results.map(result => result.show);
 }
 
-export async function getShowById(id) {
+export async function getShowById(id, seenEpisodeIds = []) {
   try {
     const show = await fetchJson(`${BASE_URL}/shows/${id}`);
     const episodes = await fetchJson(`${BASE_URL}/shows/${id}/episodes`);
+    const seasons = await fetchJson(`${BASE_URL}/shows/${id}/seasons`);
 
+    for (const season of seasons) {
+      season.episodes = episodes.filter(ep => ep.season === season.number);
+    }
     return {
       ...show,
       episodes,
-      nextUnseenEpisode(seenEpisodeIds) {
-        return episodes.find(ep => !seenEpisodeIds.includes(ep.id));
-      },
-      nextAiringEpisode() {
-        const now = new Date();
-        return episodes.find(ep => ep.airstamp && new Date(ep.airstamp) > now);
-      }
+      seasons,
+      next_episode_to_watch: episodes.find(ep => !seenEpisodeIds.includes(ep.id)) ?? episodes.find(ep => ep.airstamp && new Date(ep.airstamp) > Date.now()),
     };
   } catch (error) {
     console.error(`Error fetching show with ID ${id}:`, error);

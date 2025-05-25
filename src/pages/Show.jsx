@@ -10,6 +10,10 @@ var Show = () => {
     var id = query[query.length - 1];
     const [dbData, setDBData] = useState(null);
 
+    const onRefresh = () => {
+        fetchData(id);
+    }
+
     const fetchData = async (id) => {
         if (!id) return;
 
@@ -31,7 +35,7 @@ var Show = () => {
 
     if (dbData)
         return (<div className={styles.page}>
-            <ShowBig show={dbData.show} watchData={dbData.watchData}/>
+            <ShowBig show={dbData.show} watchData={dbData.watchData} onRefresh={onRefresh}/>
         </div>);
     return (<div className={styles.page}></div>);
 }
