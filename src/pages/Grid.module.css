@@ -29,5 +29,6 @@
 
     .grid_big {
         gap: 2em;
+        padding: 0.5em;
     }
 }
