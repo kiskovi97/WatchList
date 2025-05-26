@@ -49,13 +49,13 @@
 
     .receipt {
         height: 13em;
-        width: 100%;
+        width: max-content;
         font-size: 0.9em;
     }
     
     .receipt > div > img.background {
         width: 10em;
-        height: 10em;
+        height: 13em;
     }
 
     .receipt .description {
@@ -80,6 +80,6 @@
 
     .receipt > div > img.background {
         width: 10em;
-        height: 10em;
+        height: 13em;
     }
 }
