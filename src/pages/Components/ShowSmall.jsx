@@ -53,7 +53,7 @@ const ShowSmall = ({show, watchData }) => {
                         <div className={styles.title}>
                             <div>{show.name}</div>
                             <div>
-                                {nextEpisode ? Date.now() - Date.parse(nextEpisode.airdate + " " + nextEpisode.airtime) : ""}
+                                {nextEpisode ? nextEpisode.airdate + " " + nextEpisode.airtime : ""}
                             </div>
                             <div hidden={!nextEpisode}>
                                 {seasonEpisodeNumber - watchedEpisodeCount} episodes left
