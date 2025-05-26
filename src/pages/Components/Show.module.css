@@ -59,7 +59,7 @@
 }
 
 .image_season {
-    width: 10em;
+    max-width: 10em;
     height: 20em;
     z-index: 3;
 }
@@ -145,6 +145,11 @@
     .receipt .description > div { 
         margin-left: 1em;
         margin-right: 1em;
+    }
+
+    .image_season {
+        width: 0em;
+        height: 0em;
     }
 }
 @media only screen and (max-width: 50em) {
