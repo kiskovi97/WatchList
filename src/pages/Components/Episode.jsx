@@ -35,7 +35,7 @@ const Episode = ({ episode, show, onEpisodeWatched }) => {
                         </div>
                     </div>
                     <div className={styles.buttons}>
-                        <button onClick={watchThisEpisode}>Watched</button>
+                        <button onClick={watchThisEpisode} className={styles.dark}>Watched</button>
                         <button onClick={() => handleClick("show/" + show.id)}>Open</button>
                     </div>
                 </div>

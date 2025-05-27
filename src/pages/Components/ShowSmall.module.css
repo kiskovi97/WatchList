@@ -46,6 +46,18 @@
     gap: 1rem;
 }
 
+.buttons button {
+    border: 0px solid white;
+    background-color: lightdarkColor;
+    color: black;
+    font-weight: bold;
+}
+.buttons button.dark {
+    border: 0px solid white;
+    background-color: darkestColor;
+    color: white;
+}
+
 @media only screen and (max-width: 80em) {
     .main {
         display: grid;

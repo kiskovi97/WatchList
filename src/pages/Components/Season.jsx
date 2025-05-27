@@ -38,17 +38,21 @@ function Season({ season, episodesWatched, onEpisodesAdded, onEpisodesRemoved, e
                         <img src={image} hidden={!image} alt="" className={styles.background} />
                     </div>
                     <div>
-                        <input type="checkbox" 
+                        
+                        <h3>
+                            <input type="checkbox" 
                             onChange={() => setWatchSeason()} 
                             checked={episodes.every(epsiode => episodesWatched.includes(epsiode.id))} 
                             hidden={!editable}/>
-                        <h3>Season {season.number} - {season.name}</h3>
+                            Season {season.number} - {season.name}
+                        </h3>
                         <div>
                             {episodes.map(episode => (
                                 <div key={episode.id}>
                                     <input type="checkbox" 
                                         onChange={() => setWatchData(episode)} 
                                         checked={episodesWatched.includes(episode.id)}
+                                        className={styles.check}
                                         hidden={!editable || !episode.airstamp || Date.parse(episode.airstamp) > Date.now()}
                                         />
                                     {episode.episode_number} - {episode.name}
