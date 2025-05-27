@@ -58,7 +58,11 @@ const Home = () => {
             <div className={gStyles.grid_big} key="episodes-to-watch">
                 {shows
                 .filter(item => Date.parse(item.show.next_episode_to_watch?.airdate + " " + item.show.next_episode_to_watch?.airtime) < Date.now())
-                .map((station) => (<Episode 
+                .sort((a, b) => {
+                    const dateA = Date.parse(a.show.next_episode_to_watch?.airdate + ' ' + a.show.next_episode_to_watch?.airtime || '');
+                    const dateB = Date.parse(b.show.next_episode_to_watch?.airdate + ' ' + b.show.next_episode_to_watch?.airtime || '');
+                    return dateA - dateB;
+                }).map((station) => (<Episode 
                     episode={station.show.next_episode_to_watch} 
                     show={station.show} 
                     key={station.show.id}
@@ -68,7 +72,11 @@ const Home = () => {
             <div className={gStyles.grid_big} key="next-to-air">
                 {shows
                 .filter(item => Date.parse(item.show.next_episode_to_watch?.airdate + " " + item.show.next_episode_to_watch?.airtime) > Date.now())
-                .map((station) => (<ShowSmall 
+                .sort((a, b) => {
+                    const dateA = Date.parse(a.show.next_episode_to_watch?.airdate + ' ' + a.show.next_episode_to_watch?.airtime || '');
+                    const dateB = Date.parse(b.show.next_episode_to_watch?.airdate + ' ' + b.show.next_episode_to_watch?.airtime || '');
+                    return dateA - dateB;
+                }).map((station) => (<ShowSmall 
                     show={station.show} 
                     watchData={station.watchData} 
                     key={station.show.id}

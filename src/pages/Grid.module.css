@@ -15,6 +15,10 @@
     padding: 2em;
 }
 
+.grid_big > div {
+    width: 20em;
+}
+
 .grid > div {
     margin: auto;
     position: relative;
@@ -28,7 +32,14 @@
     }
 
     .grid_big {
+        gap: 0em;
+        padding: 0em;
+        align-content: stretch;
+    }
+
+    .grid_big > div{
         gap: 2em;
-        padding: 2em;
+        padding: 1em;
+        flex-grow: 1;
     }
 }

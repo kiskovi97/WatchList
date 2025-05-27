@@ -2,15 +2,15 @@ import { useEffect } from 'react';
 import styles from './ShowSmall.module.css'
 import { useNavigate  } from 'react-router';
 import { motion } from "framer-motion";
+import moment from "moment"
 
 const Episode = ({ episode, show, onEpisodeWatched }) => {
     const navigate = useNavigate();
     const handleClick = (index) => navigate("/" + index);
 
-    var image = episode.image?.medium;
+    var image = show.image?.medium;
 
     const watchThisEpisode = (e) => {
-        e.stopPropagation();
         onEpisodeWatched && onEpisodeWatched(show, episode);
     }
 
@@ -18,29 +18,28 @@ const Episode = ({ episode, show, onEpisodeWatched }) => {
     }, [episode]);
 
     return (
-        <div>
-            <motion.div
+        <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5 }}
             >
-                <div className={styles.receipt} onClick={() => handleClick("show/" + show.id)} >
-                    <div className={styles.image} >
-                        <img src={image} hidden={!image} alt="" className={styles.background} />
+                <div className={styles.main}>
+                    <div className={styles.image} hidden={!image}>
+                        <img src={image} alt="" className={styles.background} />
                     </div>
-                    <div className={styles.description} >
-                        <div className={styles.title}>
-                            <h3>{episode.name}</h3>
-                            <div>
-                                {episode.airdate + " " + episode.airtime}
-                            </div>
-                            <button className={styles.button} onClick={watchThisEpisode}>Watched</button>
+                    <div>
+                        <div className={styles.title}>{episode.name}</div>
+                        <div className={styles.text}>
+                            {moment(episode.airdate + " " + episode.airtime).fromNow()}
                         </div>
                     </div>
+                    <div className={styles.buttons}>
+                        <button onClick={watchThisEpisode}>Watched</button>
+                        <button onClick={() => handleClick("show/" + show.id)}>Open</button>
+                    </div>
                 </div>
-            </motion.div>
-        </div>
+        </motion.div>
         )
 };
 
