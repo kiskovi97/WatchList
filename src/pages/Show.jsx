@@ -2,8 +2,7 @@ import styles from './Page.module.css'
 import ShowBig from './Components/ShowBig'
 
 import { useEffect, useState } from 'react';
-import { getShowById } from '../tvmaze.js';
-import { fetchDataById } from '../dynamoService';
+import { fetchShowById } from '../showInfo.js';
 
 var Show = () => {
     var query = window.location.href.split('/');
@@ -15,18 +14,9 @@ var Show = () => {
     }
 
     const fetchData = async (id) => {
-        if (!id) return;
-
-        var data = await getShowById(id);
-
-        if (!data) return;
-
-        var watchDataResult = await fetchDataById(data.id);
-        console.log(watchDataResult);
-        if (watchDataResult.success)
-            setDBData({ show: data, watchData: watchDataResult.data });
-        else
-            setDBData({ show: data, watchData: undefined });
+        var dbData = await fetchShowById(id);
+        if (!dbData.show) return;
+        setDBData(dbData);
     };
 
     useEffect(() => {

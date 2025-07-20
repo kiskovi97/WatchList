@@ -19,6 +19,14 @@ function ShowBig({ show, watchData, onRefresh}) {
         if (onRefresh) onRefresh();
     };
 
+    const setOffset = (offset) => {
+        var offsetInt = Number.parseInt(offset);
+        if (watchData && offsetInt) {
+            watchData.offset = offsetInt;
+            uploadData(watchData);
+        }
+    }
+
     function onlyUnique(value, index, array) {
         return array.indexOf(value) === index;
     }
@@ -61,23 +69,30 @@ function ShowBig({ show, watchData, onRefresh}) {
                 <div className={styles.details}>
                     <button onClick={onAddToMyShows} hidden={watchData}>Add To My Shows</button>
                     <button onClick={onRemoveFromMyShows} hidden={!watchData}>Remove from My Shows</button>
+                    <div>
+                        Offset
+                        <input type="number" id="offset" name="offset" min="-24" max="48"
+                            onChange={(e) => setOffset(e.target.value)} defaultValue={watchData.offset}/>
+                        Hours
+                    </div>
                     <h1 className={styles.title}>{show.name}</h1>
                     <h4 hidden={!watchData}>
                         {(watchedEpisodeCount /seasonEpisodeNumber * 100).toPrecision(4)}% Watched ({watchedEpisodeCount} of {seasonEpisodeNumber} episodes)
                     </h4>
                     <div>{show.overview}</div>
                 </div>
-                <div className={styles.image}>
+                <div className={styles.image} key="image">
                     <img src={image} hidden={!image} alt="" className={styles.background} />
                 </div>
             </div>
             <div className={styles.description}>
             {show.seasons?.filter(season => season.season_number !== 0).map(season => (
                 <Season season={season} seriesId={show.id} key={season.season_number} 
-                episodesWatched={episodesWatched} 
-                onEpisodesAdded={onEpisodesAdded} 
-                onEpisodesRemoved={onEpisodesRemoved}
-                editable={watchData}/>))}
+                    offset={watchData ? watchData.offset : 0}
+                    episodesWatched={episodesWatched} 
+                    onEpisodesAdded={onEpisodesAdded} 
+                    onEpisodesRemoved={onEpisodesRemoved}
+                    editable={watchData}/>))}
             </div>
         </div>)
 

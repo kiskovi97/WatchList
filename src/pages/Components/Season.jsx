@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import styles from './Show.module.css'
 import { motion } from "framer-motion";
 
-function Season({ season, episodesWatched, onEpisodesAdded, onEpisodesRemoved, editable }) {
+function Season({ season, episodesWatched, onEpisodesAdded, onEpisodesRemoved, editable, offset }) {
 
     var [episodes, setEpisodes] = useState([]);
 
     const setWatchSeason = () => {
-        if (episodes.every(epsiode => episodesWatched.includes(epsiode.id) || !epsiode.airstamp || Date.parse(epsiode.airstamp) > Date.now())) {
+        if (episodes.every(epsiode => episodesWatched.includes(epsiode.id) || !epsiode.originalAirDate || epsiode.originalAirDate > Date.now())) {
             onEpisodesRemoved(episodes);
         } else {
             onEpisodesAdded(episodes);
@@ -49,13 +49,14 @@ function Season({ season, episodesWatched, onEpisodesAdded, onEpisodesRemoved, e
                         <div>
                             {episodes.map(episode => (
                                 <div key={episode.id}>
+                                    {episode.number} - 
                                     <input type="checkbox" 
                                         onChange={() => setWatchData(episode)} 
                                         checked={episodesWatched.includes(episode.id)}
                                         className={styles.check}
                                         hidden={!editable || !episode.airstamp || Date.parse(episode.airstamp) > Date.now()}
                                         />
-                                    {episode.episode_number} - {episode.name}
+                                     {episode.calculatedAirDate.toDateString()} : {episode.name}
                                 </div>
                             ))}
                         </div>
