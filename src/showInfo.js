@@ -11,7 +11,7 @@ export const fetchShowById = async (id) => {
 
         var watchDataResult = await fetchDataById(data.id);
 
-        if (watchDataResult.success)
+        if (watchDataResult.success && watchDataResult.data)
         {
             for(var season of data.seasons || [])
             {
@@ -26,5 +26,17 @@ export const fetchShowById = async (id) => {
             return { show: data, watchData: watchDataResult.data };
         }
         else
+        {
+            for(var season of data.seasons || [])
+            {
+                for(var episode of season.episodes || [])
+                {
+                    if (episode.airstamp) {
+                        episode.originalAirDate = new Date(Date.parse(episode.airstamp)) // Convert offset to milliseconds;
+                        episode.calculatedAirDate = new Date(Date.parse(episode.airstamp)) // Convert offset to milliseconds;
+                    }
+                }
+            }
             return { show: data, watchData: undefined };
+        }
     };

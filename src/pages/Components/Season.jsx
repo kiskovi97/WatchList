@@ -54,7 +54,7 @@ function Season({ season, episodesWatched, onEpisodesAdded, onEpisodesRemoved, e
                                         onChange={() => setWatchData(episode)} 
                                         checked={episodesWatched.includes(episode.id)}
                                         className={styles.check}
-                                        hidden={!editable || !episode.airstamp || Date.parse(episode.airstamp) > Date.now()}
+                                        hidden={!editable || !episode || !episode.airstamp || Date.parse(episode.airstamp) > Date.now()}
                                         />
                                      {episode.calculatedAirDate.toDateString()} : {episode.name}
                                 </div>

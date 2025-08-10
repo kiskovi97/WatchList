@@ -62,6 +62,7 @@ function ShowBig({ show, watchData, onRefresh}) {
 
     const seasonEpisodeNumber = show.episodes.length;
     const watchedEpisodeCount = watchData && watchData.episodes ? watchData.episodes.length : 0;
+    const offset = watchData ? watchData.offset : 0;
 
     return (
         <div className={styles.receipt}>
@@ -72,7 +73,7 @@ function ShowBig({ show, watchData, onRefresh}) {
                     <div>
                         Offset
                         <input type="number" id="offset" name="offset" min="-24" max="48"
-                            onChange={(e) => setOffset(e.target.value)} defaultValue={watchData.offset}/>
+                            onChange={(e) => setOffset(e.target.value)} defaultValue={offset}/>
                         Hours
                     </div>
                     <h1 className={styles.title}>{show.name}</h1>
@@ -88,7 +89,7 @@ function ShowBig({ show, watchData, onRefresh}) {
             <div className={styles.description}>
             {show.seasons?.filter(season => season.season_number !== 0).map(season => (
                 <Season season={season} seriesId={show.id} key={season.season_number} 
-                    offset={watchData ? watchData.offset : 0}
+                    offset={offset}
                     episodesWatched={episodesWatched} 
                     onEpisodesAdded={onEpisodesAdded} 
                     onEpisodesRemoved={onEpisodesRemoved}
