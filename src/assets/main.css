@@ -1,0 +1,22 @@
+:root {
+  --mainColor: #952547;
+  --darkestColor: #550527;
+  --lightColor: #f7f0f0;
+  --backgroundColor: #f3de8aa0;
+  --lightdarkColor: #d387aba0;
+}
+
+@font-face {
+  font-family: 'MyFont';
+  src:
+    local('MyFont'),
+    url('./fonts/OpenSauceOne-Regular.woff') format('woff');
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(-90deg, var(--lightColor) 0%, var(--lightdarkColor) 100%);
+  margin: 0;
+}

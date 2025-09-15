@@ -1,2 +1,3 @@
-# CookBook
-Cook Book Website for storing our Recepies
+# watchlist
+
+This is a project that lists and manages all the shows I watch
